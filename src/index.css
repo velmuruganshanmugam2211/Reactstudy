@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+.card {
+  @apply bg-blue-500 border-2 flex  border-solid border-black font-serif  border-2  m-20 flex flex-col max-w-100 justify-center items-center text-white p-5 rounded-3xl;
+}
+
+.incard {
+  @apply pb-2 rounded-lg text-2xl font-bold  ;
+}
+
+.img {
+    @apply rounded-2xl w-250 hover:shadow-blue-800  hover:shadow-2xl mb-5
+}
