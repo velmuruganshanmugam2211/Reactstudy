@@ -3,10 +3,17 @@ import html from "./assets/html.gif";
 import gta from "./assets/GTA.jpg";
 import jd from "./assets/JD.jpg";
 import PropTypes from "prop-types";
+import { useState } from "react";
 
 function Course(props) {
+
+// let purchased =false;
+const [purchased , setpurchased]=useState(false);
+
   function Bycourse(Discount) {
     console.log(props.name, "Vaggita da ni", Discount, "% Discount", "la");
+    setpurchased(true);
+    console.log(purchased)
   }
 
   if (props.show == true) {
@@ -19,6 +26,9 @@ function Course(props) {
         <button onClick={() => Bycourse(30)} className="btn">
           Buy now
         </button>
+        <p className="mt-5" >{
+          
+         purchased ? "already Purchased" : "Get it Now " }</p>
       </div>
     );
   } else {
@@ -51,7 +61,7 @@ function CourseList() {
     {
       name: "TML",
       cpny: "hello",
-      img: html,
+      img: jd,
       rate: 444,
       id: 2,
     },
@@ -65,14 +75,14 @@ function CourseList() {
     {
       name: "GTA",
       cpny: "hello",
-      img: gta,
+      img: jd,
       rate: 777,
       id: 4,
     },
     {
       name: "TA",
       cpny: "hello",
-      img: gta,
+      img: html,
       rate: 544,
       id: 5,
     },
