@@ -4,15 +4,21 @@ import gta from "./assets/GTA.jpg";
 import jd from "./assets/JD.jpg";
 import PropTypes from "prop-types";
 import { useState } from "react";
+import cart from "./assets/cart.png";
+import rts from "./assets/real tech.jpg"
+import We from "./assets/We.jpg"
+
 
 function Course(props) {
 
 // let purchased =false;
 const [purchased , setpurchased]=useState(false);
+const [discount, setdiscount]=useState(props.rate)
 
   function Bycourse(Discount) {
     console.log(props.name, "Vaggita da ni", Discount, "% Discount", "la");
     setpurchased(true);
+    setdiscount(discount-Discount)
     console.log(purchased)
   }
 
@@ -21,14 +27,17 @@ const [purchased , setpurchased]=useState(false);
       <div className="card">
         <img className="img" src={props.img} alt="" />
         <div className="incard">{props.name}</div>
-        <div>{props.cpny}</div>
-        <div>{props.rate}</div>
-        <button onClick={() => Bycourse(30)} className="btn">
-          Buy now
+        {/* <div>{props.cpny}</div> */}
+        <div>{discount}</div>
+        <button onClick={() => Bycourse(1)} className="btn">
+          Add Cart <img className="" src={cart} alt="cart" />
         </button>
+        <button  onClick={() => props.delete(props.id)} className="btn">Delete</button>
+        
+        
         <p className="mt-5" >{
           
-         purchased ? "already Purchased" : "Get it Now " }</p>
+         purchased ? "Successfully Added in Cart ✅" : "Limited Stock " }</p>
       </div>
     );
   } else {
@@ -50,11 +59,11 @@ Course.PropTypes = {
 // export default Course;
 
 function CourseList() {
-  const Courses = [
+  const [Courses,setCourses] = useState([
     {
-      name: "HTML",
+      name: "iTank",
       cpny: "hello",
-      img: html,
+      img: rts,
       rate: 333,
       id: 1,
     },
@@ -66,9 +75,9 @@ function CourseList() {
       id: 2,
     },
     {
-      name: "ML",
+      name: "State Book",
       cpny: "hello",
-      img: html,
+      img: We,
       rate: 555,
       id: 3,
     },
@@ -94,7 +103,14 @@ function CourseList() {
       rate: 555,
       id: 6,
     },
-  ];
+  ]);
+
+  function handledelete(id){
+const newCourses = Courses.filter((course)=> course.id != id)
+setCourses(newCourses);
+
+
+  }
 
   // Courses.sort((x,y)=> x.rate - y.rate)
   // const mnycourse = Courses.filter((course)=> course.rate<500)
@@ -107,6 +123,8 @@ function CourseList() {
       cpny={course.cpny}
       rate={course.rate}
       show={true}
+      delete = {handledelete}
+      id = {course.id}
     />
   ));
 
